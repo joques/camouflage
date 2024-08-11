@@ -1,0 +1,136 @@
+% ----------------------------------------------------------
+%
+% log_2024.tex
+% This is the main file of LoG 2024 submission
+% created by: José G. Quenum
+% created on: Aug. 11th 2024
+% updated on: 2024
+%
+% ---------------------------------------------------------
+
+\documentclass{article}
+%\usepackage{log_2024}						% for camera-ready version
+ \usepackage[review]{log_2024}				% for anonymous submission to proceedings track
+% \usepackage[review,eatrack]{log_2024}		% for anonymous submission to extended abstract track
+% \usepackage[preprint]{log_2024}			% for preprint version
+% \usepackage[eatrack]{log_2024}				% for accepted extended abstracts
+
+\usepackage{booktabs}						% professional-quality tables
+\usepackage{multirow}						% tabular cells spanning multiple rows
+\usepackage{amsfonts}						% blackboard math symbols
+\usepackage{graphicx}						% figures
+\usepackage{duckuments}						% sample images
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage{soul}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=10pt,font=small,labelfont=bf, labelsep=endash]{caption}
+\usepackage{tikz}
+\usepackage[linesnumbered,algoruled,vlined,boxed,commentsnumbered]{algorithm2e}
+\usepackage[]{algpseudocode}
+\usepackage{listings}
+\usepackage{complexity}
+\usepackage{siunitx}
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{tasks}
+\usepackage{todonotes}
+
+% If you want to use bibLaTeX, uncomment below:
+% \usepackage[
+%      backend=biber,
+%      style=numeric-comp,
+%      backref=true,
+%      natbib=true]{biblatex}
+% \addbibresource{reference.bib}
+%\usepackage{cleveref}
+\usepackage[acronym]{glossaries}
+
+%\crefalias{AlgoLine}{line}%
+
+\newlength{\commentWidth}
+\setlength{\commentWidth}{4cm}
+\newcommand{\atcp}[1]{\tcp*[r]{\makebox[\commentWidth]{#1\hfill}}}
+
+% If you want to use natbib:
+%\usepackage[numbers,compress,sort]{natbib}	% for numerical citations
+% \usepackage[sort,round]{natbib}			% for textual citations
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Define any theorem-like environments you require here.
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\crefname{section}{section}{sections}
+%\Crefname{section}{Section}{Sections}
+%\crefname{subsection}{section}{sections}
+%\Crefname{subsection}{Section}{Sections}
+%\crefname{figure}{figure}{figures}
+%\Crefname{figure}{Figure}{Figures}
+%\crefname{table}{table}{tables}
+%\Crefname{table}{Table}{Tables}
+%\crefname{algocf}{algorithm}{algorithms}
+%\Crefname{algocf}{Algorithm}{Algorithms}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\graphicspath{{../images/}}
+\sloppy
+
+\makeglossaries
+
+\newacronym{sn}{SN}{Social Network}
+\newacronym{hll}{HLL}{HyperLogLog}
+\newacronym{cms}{CMS}{Count Min Sketch}
+\newacronym{htn}{HTN}{Hierarchical Task Network}
+\newacronym{shop}{SHOP}{Simple Hierarchical Ordered Planner}
+\newacronym{pddl}{PDDL}{Planning Domain Definition Language}
+\newacronym{hddl}{HDDL}{Hierarchical Domain Definition Language}
+\newacronym{iope}{IOPE}{Inputs, Outputs, Preconditions and Effects}
+\newacronym{faas}{FaaS}{Function-as-a-service}
+\newacronym{csp}{CSP}{Constraint Satisfaction Problem}
+\newacronym{qos}{QoS}{Quality of Service}
+
+\title[Sub-title]{Client-side Card Fraud Detection}
+
+\author[Y. Zhu et al.]{%
+Yanqiao Zhu\thanks{Equal contribution.}\\
+University of California, Los Angeles\\
+\email{yzhu@cs.ucla.edu}\And
+Yuanqi Du\footnotemark[1]\\
+Cornell University\\
+\email{yd392@cornell.edu}\And
+Hannes Stärk\\
+Massachusetts Institute of Technology\\
+\email{hstark@mit.edu}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  Abstract goes here...
+\end{abstract}

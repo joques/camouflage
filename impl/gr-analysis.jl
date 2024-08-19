@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.45
+# v0.19.46
 
 using Markdown
 using InteractiveUtils
@@ -13,6 +13,12 @@ using BenchmarkTools
 # ╔═╡ 8f3691a9-8245-4835-a99a-b5ce3fccefb6
 using PlutoUI; PlutoUI.TableOfContents()
 
+# ╔═╡ 747679f8-e8a7-4c96-8f28-5859d9d9f950
+using AbstractTrees
+
+# ╔═╡ 5dea4c51-cf40-4607-b141-93d230e0a131
+using Gumbo
+
 # ╔═╡ 9d7fff9a-677d-4375-a17c-2a5a4ea22fca
 md"""This notebook contains implementation of ideas related to client-side card fraud detection. We explore ideas ranging from converting a Web interface into a graph to training a graph neural network for detecting similarity."""
 
@@ -20,18 +26,37 @@ md"""This notebook contains implementation of ideas related to client-side card 
 md"# Web Form Conversion"
 
 # ╔═╡ 6610754b-23a8-49f9-8a52-ef0414995111
+elt_names = ["input", "textarea", "button", "select", "fieldset", "option", "optgroup"]
 
+# ╔═╡ 4d53e74f-818e-4746-a4e9-b5dd491bc3f4
+the_doc = parsehtml(read("a_form.html", String))
+
+# ╔═╡ 6f0723cd-0082-4b64-bfa5-4583c99e3bad
+typeof(the_doc)
+
+# ╔═╡ bf0a682c-3b5b-44b2-a1fc-07bb0fae4b09
+for elem in PreOrderDFS(the_doc.root) println(tag(elem)) end
+
+# ╔═╡ 879a8fcd-6c22-41e6-adae-5c7f5e9bfbd7
+function load_form(filename::String)::HTMLDocument
+	file_str = read(filename, String)
+	return parsehtml(file_str)
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
+AbstractTrees = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+Gumbo = "708ec375-b3d6-5a57-a7ce-8257bf98657a"
 InteractiveUtils = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
+AbstractTrees = "~0.4.5"
 BenchmarkTools = "~1.5.0"
+Gumbo = "~0.8.2"
 PlutoUI = "~0.7.58"
 """
 
@@ -41,13 +66,18 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "8f72608b5d1cf7da25392ce45caeb8bb0e6aae43"
+project_hash = "5ff58f38c19f9787c25ee54668270cf61d22b850"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
 git-tree-sha1 = "6e1d2a35f2f90a4bc7c2ed98079b2ba09c35b83a"
 uuid = "6e696c72-6542-2067-7265-42206c756150"
 version = "1.3.2"
+
+[[deps.AbstractTrees]]
+git-tree-sha1 = "2d9c9a55f9c93e8887ad391fbae72f8ef55e1177"
+uuid = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
+version = "0.4.5"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
@@ -94,6 +124,18 @@ git-tree-sha1 = "05882d6995ae5c12bb5f36dd2ed3f61c98cbb172"
 uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
 version = "0.8.5"
 
+[[deps.Gumbo]]
+deps = ["AbstractTrees", "Gumbo_jll", "Libdl"]
+git-tree-sha1 = "a1a138dfbf9df5bace489c7a9d5196d6afdfa140"
+uuid = "708ec375-b3d6-5a57-a7ce-8257bf98657a"
+version = "0.8.2"
+
+[[deps.Gumbo_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "29070dee9df18d9565276d68a596854b1764aa38"
+uuid = "528830af-5a63-567c-a44a-034ed33b8444"
+version = "0.10.2+0"
+
 [[deps.Hyperscript]]
 deps = ["Test"]
 git-tree-sha1 = "179267cfa5e712760cd43dcae385d7ea90cc25a4"
@@ -115,6 +157,12 @@ version = "0.2.5"
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
+
+[[deps.JLLWrappers]]
+deps = ["Artifacts", "Preferences"]
+git-tree-sha1 = "7e5d6779a1e09a36db2a7b6cff50942a0a7d0fca"
+uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
+version = "1.5.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -317,8 +365,14 @@ version = "17.4.0+2"
 # ╠═404657a6-580f-11ef-25b4-1f1da5c76d4f
 # ╠═2ab63110-c3ac-45f7-bb17-4e22bd053481
 # ╠═8f3691a9-8245-4835-a99a-b5ce3fccefb6
+# ╠═747679f8-e8a7-4c96-8f28-5859d9d9f950
+# ╠═5dea4c51-cf40-4607-b141-93d230e0a131
 # ╠═9d7fff9a-677d-4375-a17c-2a5a4ea22fca
 # ╠═e401e399-8c8f-488b-8900-118d9d9dbb51
 # ╠═6610754b-23a8-49f9-8a52-ef0414995111
+# ╠═4d53e74f-818e-4746-a4e9-b5dd491bc3f4
+# ╠═6f0723cd-0082-4b64-bfa5-4583c99e3bad
+# ╠═bf0a682c-3b5b-44b2-a1fc-07bb0fae4b09
+# ╠═879a8fcd-6c22-41e6-adae-5c7f5e9bfbd7
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

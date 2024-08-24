@@ -22,9 +22,7 @@ When it comes to methodologies for capturing and analysing web-based fraud, part
 **3. GitHub Phishing Detection Projects**
    - Several GitHub projects focus on phishing detection by extracting features from URLs and training machine learning models. For instance, the project by gangeshbaskerr uses features like domain age and URL length to train models such as Decision Trees and Random Forests, aiming to reduce phishing attacks significantly[4].
 
-These methodologies leverage advanced machine learning techniques and browser fingerprinting to enhance the detection and prevention of web-based fraud. By employing such approaches, organisations can better protect against fraudulent activities that exploit web interfaces and user interactions.
-
-Citations:
+## Reference list
 * [1] https://www.scitepress.org/Papers/2016/59656/59656.pdf
 * [2] https://arxiv.org/abs/2407.04732
 * [3] https://sist.sathyabama.ac.in/sist_naac/documents/1.3.4/1822-b.e-cse-batchno-287.pdf

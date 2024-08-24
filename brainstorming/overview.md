@@ -37,12 +37,12 @@ to be continued...
 
 In summary, the literature strongly supports the use of graph neural networks and ensemble methods for credit card fraud detection. GNNs can effectively model complex relationships in transaction data, while ensemble techniques combine multiple classifiers to enhance detection performance and adaptability. These approaches, combined with the advantages of automatic fraud detection algorithms, provide a powerful framework for combating credit card fraud.
 
-Sources
-[1] https://www.iosrjournals.org/iosr-jce/papers/Vol26-issue1/Ser-1/B2601011118.pdf
-[2] https://ijeecs.iaescore.com/index.php/IJEECS/article/view/36831
-[3] https://www.sciencedirect.com/science/article/abs/pii/S0957417423026581
-[4] https://www.nected.ai/blog/fraud-detection-algorithms
-[5] https://www.mdpi.com/2504-2289/8/1/6
-[6] https://www.sciencedirect.com/science/article/pii/S240584402401497X
-[7] https://www.fraud.com/post/anomaly-detection
-[8] https://arxiv.org/abs/2402.14708
+## Sources
+- [1] https://www.iosrjournals.org/iosr-jce/papers/Vol26-issue1/Ser-1/B2601011118.pdf
+- [2] https://ijeecs.iaescore.com/index.php/IJEECS/article/view/36831
+- [3] https://www.sciencedirect.com/science/article/abs/pii/S0957417423026581
+- [4] https://www.nected.ai/blog/fraud-detection-algorithms
+- [5] https://www.mdpi.com/2504-2289/8/1/6
+- [6] https://www.sciencedirect.com/science/article/pii/S240584402401497X
+- [7] https://www.fraud.com/post/anomaly-detection
+- [8] https://arxiv.org/abs/2402.14708

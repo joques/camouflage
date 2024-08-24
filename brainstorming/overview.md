@@ -4,7 +4,6 @@ The main objective of this project is to build an **intelligent** system that ca
 
 to be continued...
 
-Using graph neural networks and ensemble methods for credit card fraud detection
 
 ## Graph Neural Networks (GNNs) for Fraud Detection
 

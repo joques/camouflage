@@ -48,9 +48,8 @@ Imbalanced datasets pose significant challenges in fraud detection, as fraudulen
 
 Scalability and real-time processing are critical for handling large volumes of transaction data. Future research may explore the application of GNNs in edge computing environments to enable client-side fraud detection, reducing latency and improving response times[7][8].
 
-By covering these areas, the paper can provide a comprehensive overview of the current state of client-side fraud detection, highlight the advantages of using advanced graph-based techniques, and suggest potential avenues for future research.
 
-Citations:
+## Reference list
 * [1] https://developer.nvidia.com/blog/optimizing-fraud-detection-in-financial-services-with-graph-neural-networks-and-nvidia-gpus/
 *[2] https://journalofbigdata.springeropen.com/articles/10.1186/s40537-023-00750-3
 *[3] https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0303890

@@ -51,11 +51,11 @@ Scalability and real-time processing are critical for handling large volumes of 
 
 ## Reference list
 * [1] https://developer.nvidia.com/blog/optimizing-fraud-detection-in-financial-services-with-graph-neural-networks-and-nvidia-gpus/
-*[2] https://journalofbigdata.springeropen.com/articles/10.1186/s40537-023-00750-3
-*[3] https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0303890
-*[4] https://www.infoq.com/articles/generative-ai-fraud-prevention/
-*[5] https://www.mdpi.com/2079-8954/11/11/539
-*[6] https://arxiv.org/abs/2105.14568
-*[7] https://dl.acm.org/doi/10.1145/3511808.3557136
-*[8] https://www.scirp.org/journal/paperinformation?paperid=133190
-*[9] https://arxiv.org/html/2406.11389v1
+* [2] https://journalofbigdata.springeropen.com/articles/10.1186/s40537-023-00750-3
+* [3] https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0303890
+* [4] https://www.infoq.com/articles/generative-ai-fraud-prevention/
+* [5] https://www.mdpi.com/2079-8954/11/11/539
+* [6] https://arxiv.org/abs/2105.14568
+* [7] https://dl.acm.org/doi/10.1145/3511808.3557136
+* [8] https://www.scirp.org/journal/paperinformation?paperid=133190
+* [9] https://arxiv.org/html/2406.11389v1

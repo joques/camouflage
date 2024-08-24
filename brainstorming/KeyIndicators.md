@@ -1,7 +1,5 @@
-Identifying fake banking websites is crucial for protecting personal and financial information from phishing attacks. Here are the key indicators to look for when assessing the legitimacy of a banking website:
-
 ## Key Indicators of a Fake Banking Website
-
+Identifying fake banking websites is crucial for protecting personal and financial information from phishing attacks. Here are the key indicators to look for when assessing the legitimacy of a banking website:-
 ### 1. **Suspicious URLs**
 - **Misspelled Domains**: Fake banking websites often have URLs that closely resemble legitimate ones but contain slight misspellings or additional words. For example, instead of "www.bankname.com," a fraudulent site might use "www.bankname-secure.com" or "www.banname.com."
 - **Lack of HTTPS**: Legitimate banking sites use HTTPS, indicated by a padlock symbol in the address bar. If the site only uses HTTP, it is a significant red flag indicating potential fraud[2][3].

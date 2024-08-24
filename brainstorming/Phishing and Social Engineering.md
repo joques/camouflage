@@ -43,11 +43,11 @@ To combat phishing and social engineering scams, several strategies can be imple
 Phishing and social engineering scams pose significant risks to individuals and organisations, leveraging psychological manipulation to extract sensitive information. Understanding the various types of attacks, their impacts, and effective prevention strategies is crucial in mitigating these threats. Ongoing education and vigilance are essential to protect against the evolving landscape of social engineering fraud.
 
 ## Reference List
-[1] https://www.biocatch.com/blog/types-social-engineering-attacks
-[2] https://www.hsbc.com.hk/help/cybersecurity-and-fraud/social-engineering/
-[3] https://www.epicbrokers.com/insights/what-is-social-engineering-fraud/
-[4] https://cfa.nhs.uk/fraud-prevention/reference-guide/cyber-enabled-fraud/cyber-threats/social-engineering
-[5] https://www.morganstanley.com/articles/social-engineering-fraud
-[6] https://www.tripwire.com/state-of-security/5-social-engineering-attacks-to-watch-out-for
-[7] https://www.checkpoint.com/cyber-hub/threat-prevention/social-engineering-attacks/social-engineering-vs-phishing/
-[8] https://www.waylay.io/articles/understanding-the-threat-of-card-transaction-fraud-and-its-impact-on-the-financial-ecosystem
+- [1] https://www.biocatch.com/blog/types-social-engineering-attacks
+- [2] https://www.hsbc.com.hk/help/cybersecurity-and-fraud/social-engineering/
+- [3] https://www.epicbrokers.com/insights/what-is-social-engineering-fraud/
+- [4] https://cfa.nhs.uk/fraud-prevention/reference-guide/cyber-enabled-fraud/cyber-threats/social-engineering
+- [5] https://www.morganstanley.com/articles/social-engineering-fraud
+- [6] https://www.tripwire.com/state-of-security/5-social-engineering-attacks-to-watch-out-for
+- [7] https://www.checkpoint.com/cyber-hub/threat-prevention/social-engineering-attacks/social-engineering-vs-phishing/
+- [8] https://www.waylay.io/articles/understanding-the-threat-of-card-transaction-fraud-and-its-impact-on-the-financial-ecosystem

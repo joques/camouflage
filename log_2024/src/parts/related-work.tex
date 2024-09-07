@@ -1,6 +1,19 @@
 \section{Related Work} % (fold)
 \label{sec:related-work}
 
-Coming soon...
+
+The study by Bernardo and Domingos explores various web-based fingerprinting techniques, categorising them into browser and cross-browser fingerprinting. These techniques allow websites to differentiate devices based on browser features or system settings, even across different browsers. The taxonomy provided in this study helps identify security and privacy threats associated with each technique~\cite{bernado-domingos:2016}. 
+
+{\texttt{SEON}}'s\footnote{\url{https://seon.io/resources/browser-fingerprinting/}} platform employs browser fingerprinting as a fraud prevention technique. It uses HTML5 canvas fingerprinting and WebGL fingerprinting to create unique user IDs, which can help detect fraudulent activities like identity theft and \gls{cnp} fraud. SEON combines these techniques with other fraud detection features, such as social media lookups and IP analysis, to enhance security.
+
+{\texttt{FingerprintJS}}\footnote{\url{https://fingerprint.com/blog/best-npm-packages-browser-fingerprinting/}} is an open-source library that provides browser fingerprinting capabilities. It identifies website visitors by analysing their browser and device configurations, offering a high level of accuracy in detecting fraud. The library is easy to integrate and can be enhanced with the Pro version for server-side processing and additional features.
+
+{\texttt{PhishNet}}~\cite{kumar-anthony-banga-sohal:2024} is a web application that uses machine learning, specifically XGBoost, to detect phishing websites. It processes datasets of URLs to extract features like URL length and domain age and training models to identify phishing sites with high accuracy. The application provides real-time predictions and is scalable, utilising platforms like {\texttt{Google Colab}} and {\texttt{AWS EC2}}.
+
+The Fresh-Phish framework is an open-source system designed to build machine-learning models for phishing website detection. It focuses on feature extraction from URLs and employs various machine-learning algorithms to predict phishing sites. This framework addresses the challenge of detecting zero-day phishing attempts by automating feature engineering and model training.
+
+Several GitHub projects\footnote{\url{https://github.com/gangeshbaskerr/Phishing-Website-Detection}} focus on phishing detection by extracting features from URLs and training machine learning models. For instance, the project by gangeshbaskerr uses features like domain age and URL length to train models such as Decision Trees and Random Forests, aiming to reduce phishing attacks significantly.
+
+to be continued...
 
 % section Related Work (end)

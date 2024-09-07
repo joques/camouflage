@@ -45,6 +45,8 @@
 \usepackage{subcaption}
 \usepackage{tasks}
 \usepackage{todonotes}
+\usepackage[numbers,compress,sort]{natbib}
+
 
 % If you want to use bibLaTeX, uncomment below:
 % \usepackage[
@@ -112,25 +114,23 @@
 \newacronym{faas}{FaaS}{Function-as-a-service}
 \newacronym{csp}{CSP}{Constraint Satisfaction Problem}
 \newacronym{qos}{QoS}{Quality of Service}
+\newacronym{gnn}{GNN}{Graph Neural Network}
+\newacronym{cnp}{CNP}{card-not-present}
 
-\title[Sub-title]{Client-side Card Fraud Detection}
+\title[Sub-title]{Client-side Alert on Banking Information Theft}
 
-\author[Y. Zhu et al.]{%
-Yanqiao Zhu\thanks{Equal contribution.}\\
-University of California, Los Angeles\\
-\email{yzhu@cs.ucla.edu}\And
-Yuanqi Du\footnotemark[1]\\
-Cornell University\\
-\email{yd392@cornell.edu}\And
-Hannes Stärk\\
-Massachusetts Institute of Technology\\
-\email{hstark@mit.edu}
-}
+\author[Quenum and Gamundani]{%
+  Jos\'{e} Quenum\\
+Namibia University of Science and Technology, Windhoek\\
+\email{jquenum@nust.na}\And
+Attlee Gamundani\\
+Namibia University of Science and Technology, Windhoek\\
+\email{agamundani@nust.na}}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  Abstract goes here...
+  This paper proposes an alert mechanism for potential banking information theft on the user side. While much effort has been invested in developing safer E-Commerce and online transactional applications to protect vendors, more needs to be accomplished to protect the clients of such systems against phishing. Generally, they are presented with recommendations and good practices to guard against fraudsters attempting to steal critical banking information from them. We argue that fraudsters use ever-changing social engineering tactics which often render these practices obsolete. This paper proposes a proactive approach to trigger an alert on potential phishing of banking information.  A typical scenario of phishing tactics uses an email to lure the user into clicking on a link with a URL corresponding to a Web interface where the critical information is captured. Our approach analyses the link and look for similar, mainly phonetically-sounding,  domain names. We further compare the web pages and the forms that capture the information. We transform these forms into graphs and compare them using a convolutional graph neural network (GNN). The intuition behind our approach suggests that the co-existence of similar phonetically sounding domains with almost identical web forms raises the probability of some of these domains being \emph{illegitimate}. Thus, we trigger an alert cautioning the user about a potential information theft. Our approach focuses on banking information theft. We present the approach and report on the results of our experiments.
 \end{abstract}

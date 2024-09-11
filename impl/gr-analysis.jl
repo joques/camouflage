@@ -37,6 +37,9 @@ using Flux
 # ╔═╡ a3e803d9-4270-46b7-8e32-f6cfada7dd4b
  using Flux: DataLoader
 
+# ╔═╡ 3af31420-701d-45f7-82de-8d49bdd83a20
+using Flux: onecold, onehotbatch, logitcrossentropy
+
 # ╔═╡ 93b11ce0-d5a1-4f1f-b995-fcb4376a3573
 using LinearAlgebra, Statistics
 
@@ -68,17 +71,22 @@ md"""Alternatively to loading a form from a local file, we might have to downloa
 # ╔═╡ 1acca5a0-0dea-41b0-a3ee-197608594d04
 md"The function __load_document__ loads an HTML document from a local file"
 
+# ╔═╡ 7149848d-648b-48ad-8b40-7486a2999f26
+function load_url(the_url::String)::HTMLDocument
+	if startswith(the_url, "http://") || startswith(the_url, "https://")
+		my_doc = HTTP.get(the_url)
+		return parsehtml(String(my_doc.body))
+	else
+		my_doc2 = HTTP.get("http://"*the_url)
+		return parsehtml(String(my_doc2.body))
+	end
+end
+
 # ╔═╡ 95d522ff-4561-4940-a24e-4efff44c1b1b
 function load_doc(filename::String)::HTMLDocument
 	file_str = read(filename, String)
 	return parsehtml(file_str)
 end
-
-# ╔═╡ 4d53e74f-818e-4746-a4e9-b5dd491bc3f4
-the_doc = load_doc("form_eg1.html")
-
-# ╔═╡ bf0a682c-3b5b-44b2-a1fc-07bb0fae4b09
-for elem in PreOrderDFS(the_doc.root) println(typeof(elem)) end
 
 # ╔═╡ 119d2a69-5834-40c8-9607-f911e9313e72
 function get_tags(the_root::HTMLNode)::Vector{Symbol}
@@ -105,14 +113,6 @@ function extract_nodes(the_root::HTMLNode)::Vector{HTMLNode}
 	end
 
 	return the_node_col
-end
-
-# ╔═╡ 0c8ea8c0-5150-4d54-93ff-585b607da2c6
-node_vec = extract_nodes(the_doc.root)
-
-# ╔═╡ 80d00858-f53a-45d8-9644-c8138fe07f61
-for (i, j) in enumerate(node_vec)
-	println("index $(i) and value $(j)")
 end
 
 # ╔═╡ b1565239-8204-4d7d-b483-95b83502406f
@@ -143,20 +143,11 @@ function construct_graph(node_vec::Vector{HTMLNode})::WebComp
 	return final_comp
 end
 
-# ╔═╡ 9947e384-2e15-4ae8-98fc-4106ec5cbaef
-our_comp = construct_graph(node_vec)
-
-# ╔═╡ 2f0054d7-8f1f-4378-b2d2-93616d24aac0
-gplot(our_comp.c_graph)
-
-# ╔═╡ e22c847e-1880-435f-82fa-4b7eed4fc52b
-isempty("hello")
-
 # ╔═╡ b654b279-ebfd-4a2b-9f7b-5d6e3b65b5f2
-function get_attached_text(the_node::HTMLElement)::Tuple{Vector{String}, Float32}
+function get_attached_text(the_node::HTMLElement)::Vector{String}
 	the_tag = tag(the_node)
 	if the_tag == :label
-		return ([String(the_tag), getattr(the_node, "for")], Float32(0.3))
+		return [String(the_tag), getattr(the_node, "for")]
 	elseif the_tag == :input
 		attr_vec = Vector{String}()
 		push!(attr_vec, String(the_tag))
@@ -170,9 +161,9 @@ function get_attached_text(the_node::HTMLElement)::Tuple{Vector{String}, Float32
 		if haskey(all_attrs, "type")
 			push!(attr_vec, getattr(the_node, "type"))
 		end
-		return (attr_vec, Float32(1.0))
+		return attr_vec
 	else
-		return (["other"], Float32(0.0))
+		return ["other"]
 	end
 end
 
@@ -188,35 +179,87 @@ function transform_to_GNN(old_g::WebComp)::GNNGraph
 	embedding_table = load_embeddings(GloVe)
 	all_word_indexes = Dict(single_word=>an_index for (an_index,single_word) in enumerate(embedding_table.vocab))
 	gr_data = zeros(50, nv(old_g.c_graph))
-	target_data = Vector{Float32}()
 	
-
 	# generate the embeddings for ndata.x
 	# Will need to refine the text associated with a node
 	for cur_ind in vertices(old_g.c_graph)
-		#println("current index $(cur_ind)")
 		if haskey(old_g.c_mapping, cur_ind)
 			cur_node = old_g.c_mapping[cur_ind]
 			proc_txt = get_attached_text(cur_node)
-			attached_txt = proc_txt[1]
+			attached_txt = proc_txt
 			cur_init_embedding = zeros(50, 1)
 			for single_attached_txt in attached_txt
-				txt_ind = all_word_indexes[lowercase(single_attached_txt)]
-				cur_init_embedding  = cur_init_embedding + embedding_table.embeddings[:, txt_ind] 
+				if haskey(all_word_indexes, lowercase(single_attached_txt))
+					txt_ind = all_word_indexes[lowercase(single_attached_txt)]
+					cur_init_embedding  = cur_init_embedding + embedding_table.embeddings[:, txt_ind]
+				else
+					cur_init_embedding = cur_init_embedding + rand(Float32, 50, 1)
+				end 
 			end
 			gr_data[:,cur_ind] = cur_init_embedding
-			push!(target_data, proc_txt[2])
 		end
 	end
 	
 	result.ndata.x = gr_data
-	result.ndata.y = target_data
 	
 	return result
 end
 
-# ╔═╡ 5b788e00-e60b-4ec4-95e8-87699847604e
-the_gnn_gr = transform_to_GNN(our_comp)
+# ╔═╡ bd3e3302-23f7-449f-ab74-2e4b0dd28138
+function augment_graph(init_comp::WebComp, the_limit::Int64)::WebComp
+	counter = nv(init_comp.c_graph) + 1
+	while counter <= the_limit
+		add_vertex!(init_comp.c_graph)
+		push!(init_comp.c_mapping, counter => HTMLElement(:div))
+		counter += 1
+	end
+	return init_comp
+end
+
+# ╔═╡ 4fdb1bd0-c04e-46ba-bcaa-f6e898f83b78
+md"# Add Examples"
+
+# ╔═╡ 395427bd-fa72-4316-bc84-a61a3290d51a
+md"## Example 1"
+
+# ╔═╡ 493f9038-75b5-40b2-932c-a07a35a7323b
+doc1 = load_doc("form_eg1.html")
+
+# ╔═╡ 058fcd6a-bd44-42ed-b52f-9a362efc8cae
+doc1_nodes = extract_nodes(doc1.root)
+
+# ╔═╡ 6fd2db8e-5dd2-4291-bfe6-db216c118ca0
+doc1_comp = construct_graph(doc1_nodes)
+
+# ╔═╡ 5fa1f2c5-1b1b-4e0f-af49-d6cdb51b5ed6
+gplot(doc1_comp.c_graph)
+
+# ╔═╡ 9744ab89-2fd6-4ca3-8045-74e80a3b73cb
+doc1_gnn = transform_to_GNN(doc1_comp)
+
+# ╔═╡ 59b9beae-5a33-418c-a88b-52d6b973d60c
+md"## Example 2"
+
+# ╔═╡ 8404a638-8fe8-4c6d-8c75-5aeb9abb4e21
+doc2 = load_doc("form_eg2.html")
+
+# ╔═╡ 3b7e1410-dd14-4fab-91dd-fd52001d2201
+doc2_nodes = extract_nodes(doc2.root)
+
+# ╔═╡ f0e2b25f-b007-4577-989e-098c46f5b831
+doc2_comp = construct_graph(doc2_nodes)
+
+# ╔═╡ 842d91cb-c78c-48e9-8258-b2c5b94a3a44
+gplot(doc2_comp.c_graph)
+
+# ╔═╡ 36206d1d-6fd4-43cc-bd02-95e4a8bb293e
+doc2_comp_aug = augment_graph(doc2_comp, 18)
+
+# ╔═╡ 5bc5e07f-7f6b-4be6-baee-718d7ab2f3bc
+gplot(doc2_comp_aug.c_graph)
+
+# ╔═╡ 55f1f070-c814-49a8-9c77-4d623c5c26c5
+doc2_gnn = transform_to_GNN(doc2_comp_aug)
 
 # ╔═╡ 843966db-0670-4906-92d6-64abe54dc39d
 md"# Define the model"
@@ -232,7 +275,66 @@ function create_model(din, d, dout)
 end
 
 # ╔═╡ a37b0d1e-67a0-4ff6-b1e8-a4e0d96e5397
+function eval_loss_accuracy(model, data_loader, device)
+    loss = 0.0
+    acc = 0.0
+    ntot = 0
+    for (g, y) in data_loader
+        g, y = MLUtils.batch(g) |> device, y |> device
+        n = length(y)
+        ŷ = model(g, g.ndata.x)
+        loss += logitcrossentropy(ŷ, y) * n
+        acc += mean((ŷ .> 0) .== y) * n
+        ntot += n
+    end
+    return (loss = round(loss / ntot, digits = 4),
+            acc = round(acc * 100 / ntot, digits = 2))
+end
 
+# ╔═╡ b9cb9f91-2de0-4a1d-b9ad-8c9ee730bfa2
+my_y = onehotbatch([-1, 1], [-1, 1])
+
+# ╔═╡ d59d90b5-0476-4cae-963a-bd35005c79ba
+train_loader = DataLoader(([doc1_gnn, doc2_gnn], my_y), batchsize = 2, shuffle = true)
+
+# ╔═╡ 2df7bbfc-3555-4217-89fc-57e3ec76ae8e
+function train!(model, tr_loader; epochs = 200, η = 1e-2, infotime = 10)
+    # device = Flux.gpu # uncomment this for GPU training
+    device = Flux.cpu
+    model = model |> device
+    opt = Flux.setup(Adam(1e-3), model)
+
+    function report(epoch)
+        train = eval_loss_accuracy(model, tr_loader, device)
+        #test = eval_loss_accuracy(model, test_loader, device)
+        @info (; epoch, train)
+    end
+
+    report(0)
+    for epoch in 1:epochs
+        for (g, y) in train_loader
+            g, y = MLUtils.batch(g) |> device, y |> device
+            grad = Flux.gradient(model) do model
+                ŷ = model(g, g.ndata.x)
+                logitcrossentropy(ŷ, y)
+            end
+            Flux.update!(opt, model, grad[1])
+        end
+        epoch % infotime == 0 && report(epoch)
+    end
+end
+
+# ╔═╡ a97716aa-42df-4af7-abae-ea68814312d1
+md"# Train the model"
+
+# ╔═╡ 7a117d19-9578-44ef-ba9f-23ff764932bd
+begin
+    nin = 50
+    nh = 16
+    nout = 2
+    model = create_model(nin, nh, nout)
+    train!(model, train_loader)
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1835,6 +1937,7 @@ version = "17.4.0+2"
 # ╠═90b41b72-ff26-4d1f-a677-79290341d5c2
 # ╠═00ad8ec7-2341-40f5-83d4-3aabf0f210f5
 # ╠═a3e803d9-4270-46b7-8e32-f6cfada7dd4b
+# ╠═3af31420-701d-45f7-82de-8d49bdd83a20
 # ╠═93b11ce0-d5a1-4f1f-b995-fcb4376a3573
 # ╠═774558b7-2e0e-4c99-ae67-5d60341d21e2
 # ╠═e18100f7-c392-4c4e-8d53-2f0b6a97e797
@@ -1845,27 +1948,41 @@ version = "17.4.0+2"
 # ╠═34c8daa4-28d8-4441-a035-2271d9066cd9
 # ╠═ee00ffe5-9c66-4fce-acc3-3b898498226f
 # ╠═1acca5a0-0dea-41b0-a3ee-197608594d04
+# ╠═7149848d-648b-48ad-8b40-7486a2999f26
 # ╠═95d522ff-4561-4940-a24e-4efff44c1b1b
-# ╠═4d53e74f-818e-4746-a4e9-b5dd491bc3f4
-# ╠═bf0a682c-3b5b-44b2-a1fc-07bb0fae4b09
 # ╠═119d2a69-5834-40c8-9607-f911e9313e72
 # ╠═1ec0dadb-f814-41a8-9db5-e07c03feca67
-# ╠═0c8ea8c0-5150-4d54-93ff-585b607da2c6
-# ╠═80d00858-f53a-45d8-9644-c8138fe07f61
 # ╠═b1565239-8204-4d7d-b483-95b83502406f
 # ╠═c170f7ae-5868-49fc-9cd0-090d5b128ebc
 # ╠═33f64868-06e8-4574-942c-2b5db99d1dc8
 # ╠═c61f1fd3-6fca-48c9-8365-1c98353c4f5a
-# ╠═9947e384-2e15-4ae8-98fc-4106ec5cbaef
-# ╠═2f0054d7-8f1f-4378-b2d2-93616d24aac0
-# ╠═e22c847e-1880-435f-82fa-4b7eed4fc52b
 # ╠═b654b279-ebfd-4a2b-9f7b-5d6e3b65b5f2
 # ╠═48485a79-f533-4751-828a-32385a09b513
 # ╠═aee5ba3c-f171-496e-a0df-2bebb695f6f6
 # ╠═f57065a3-1606-47f0-a93d-f1e2fb5cf5a0
-# ╠═5b788e00-e60b-4ec4-95e8-87699847604e
+# ╠═bd3e3302-23f7-449f-ab74-2e4b0dd28138
+# ╠═4fdb1bd0-c04e-46ba-bcaa-f6e898f83b78
+# ╠═395427bd-fa72-4316-bc84-a61a3290d51a
+# ╠═493f9038-75b5-40b2-932c-a07a35a7323b
+# ╠═058fcd6a-bd44-42ed-b52f-9a362efc8cae
+# ╠═6fd2db8e-5dd2-4291-bfe6-db216c118ca0
+# ╠═5fa1f2c5-1b1b-4e0f-af49-d6cdb51b5ed6
+# ╠═9744ab89-2fd6-4ca3-8045-74e80a3b73cb
+# ╠═59b9beae-5a33-418c-a88b-52d6b973d60c
+# ╠═8404a638-8fe8-4c6d-8c75-5aeb9abb4e21
+# ╠═3b7e1410-dd14-4fab-91dd-fd52001d2201
+# ╠═f0e2b25f-b007-4577-989e-098c46f5b831
+# ╠═842d91cb-c78c-48e9-8258-b2c5b94a3a44
+# ╠═36206d1d-6fd4-43cc-bd02-95e4a8bb293e
+# ╠═5bc5e07f-7f6b-4be6-baee-718d7ab2f3bc
+# ╠═55f1f070-c814-49a8-9c77-4d623c5c26c5
 # ╠═843966db-0670-4906-92d6-64abe54dc39d
 # ╠═0990ad01-aa95-4453-98c0-ac375a066d63
 # ╠═a37b0d1e-67a0-4ff6-b1e8-a4e0d96e5397
+# ╠═2df7bbfc-3555-4217-89fc-57e3ec76ae8e
+# ╠═b9cb9f91-2de0-4a1d-b9ad-8c9ee730bfa2
+# ╠═d59d90b5-0476-4cae-963a-bd35005c79ba
+# ╠═a97716aa-42df-4af7-abae-ea68814312d1
+# ╠═7a117d19-9578-44ef-ba9f-23ff764932bd
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

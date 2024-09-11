@@ -32,3 +32,67 @@ pages = {1024--1034},
       primaryClass={cs.CR},
       url={https://arxiv.org/abs/2407.04732}, 
 }
+
+@book{gusfield:1997,
+author = {Gusfield, Dan},
+title = {Algorithms on strings, trees, and sequences: computer science and computational biology},
+year = {1997},
+isbn = {0521585198},
+publisher = {Cambridge University Press},
+address = {USA}
+}
+
+@article{ukkonen:1995,
+author = {Ukkonen, Esko},
+title = {On-line construction of suffix trees},
+year = {1995},
+issue_date = {September 1995},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+volume = {14},
+number = {3},
+issn = {0178-4617},
+url = {https://doi.org/10.1007/BF01206331},
+doi = {10.1007/BF01206331},
+abstract = {An on-line algorithm is presented for constructing the suffix tree for a given string in time linear in the length of the string. The new algorithm has the desirable property of processing the string symbol by symbol from left to right. It always has the suffix tree for the scanned part of the string ready. The method is developed as a linear-time version of a very simple algorithm for (quadratic size) suffixtries. Regardless of its quadratic worst case this latter algorithm can be a good practical method when the string is not too long. Another variation of this method is shown to give, in a natural way, the well-known algorithms for constructing suffix automata (DAWGs).},
+journal = {Algorithmica},
+month = {sep},
+pages = {249–260},
+numpages = {12},
+keywords = {DAWG, Linear-time algorithm, Suffix automaton, Suffix tree, Suffix trie}
+}
+
+@inproceedings{leis-kemper-neumann:2013,
+author = {Leis, Viktor and Kemper, Alfons and Neumann, Thomas},
+title = {The adaptive radix tree: ARTful indexing for main-memory databases},
+year = {2013},
+isbn = {9781467349093},
+publisher = {IEEE Computer Society},
+address = {USA},
+url = {https://doi.org/10.1109/ICDE.2013.6544812},
+doi = {10.1109/ICDE.2013.6544812},
+abstract = {Main memory capacities have grown up to a point where most databases fit into RAM. For main-memory database systems, index structure performance is a critical bottleneck. Traditional in-memory data structures like balanced binary search trees are not efficient on modern hardware, because they do not optimally utilize on-CPU caches. Hash tables, also often used for main-memory indexes, are fast but only support point queries. To overcome these shortcomings, we present ART, an adaptive radix tree (trie) for efficient indexing in main memory. Its lookup performance surpasses highly tuned, read-only search trees, while supporting very efficient insertions and deletions as well. At the same time, ART is very space efficient and solves the problem of excessive worst-case space consumption, which plagues most radix trees, by adaptively choosing compact and efficient data structures for internal nodes. Even though ART's performance is comparable to hash tables, it maintains the data in sorted order, which enables additional operations like range scan and prefix lookup.},
+booktitle = {Proceedings of the 2013 IEEE International Conference on Data Engineering (ICDE 2013)},
+pages = {38–49},
+numpages = {12},
+series = {ICDE '13}
+}
+
+@article{morrison:1968,
+author = {Morrison, Donald R.},
+title = {{PATRICIA} — Practical Algorithm To Retrieve Information Coded in Alphanumeric},
+year = {1968},
+issue_date = {Oct. 1968},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {15},
+number = {4},
+issn = {0004-5411},
+url = {https://doi.org/10.1145/321479.321481},
+doi = {10.1145/321479.321481},
+abstract = {PATRICIA is an algorithm which provides a flexible means of storing, indexing, and retrieving information in a large file, which is economical of index space and of reindexing time. It does not require rearrangement of text or index as new material is added. It requires a minimum restriction of format of text and of keys; it is extremely flexible in the variety of keys it will respond to. It retrieves information in response to keys furnished by the user with a quantity of computation which has a bound which depends linearly on the length of keys and the number of their proper occurrences and is otherwise independent of the size of the library. It has been implemented in several variations as FORTRAN programs for the CDC-3600, utilizing disk file storage of text. It has been applied to several large information-retrieval problems and will be applied to others.},
+journal = {J. ACM},
+month = {oct},
+pages = {514–534},
+numpages = {21}
+}

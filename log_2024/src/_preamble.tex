@@ -55,10 +55,10 @@
 %      backref=true,
 %      natbib=true]{biblatex}
 % \addbibresource{reference.bib}
-%\usepackage{cleveref}
 \usepackage[acronym]{glossaries}
-
 %\crefalias{AlgoLine}{line}%
+
+%\usepackage{cleveref}
 
 \newlength{\commentWidth}
 \setlength{\commentWidth}{4cm}
@@ -78,8 +78,10 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{fact}[theorem]{Fact}
-\newtheorem{definition}{Definition}
+%\newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -97,35 +99,22 @@
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
-\DeclareGraphicsExtensions{.pdf,.png,.jpg}
-\graphicspath{{../images/}}
+\DeclareGraphicsExtensions{.pdf, .png, .jpg}
+\graphicspath{{./images/}}
 \sloppy
 
 \makeglossaries
 
-\newacronym{sn}{SN}{Social Network}
-\newacronym{hll}{HLL}{HyperLogLog}
-\newacronym{cms}{CMS}{Count Min Sketch}
-\newacronym{htn}{HTN}{Hierarchical Task Network}
-\newacronym{shop}{SHOP}{Simple Hierarchical Ordered Planner}
-\newacronym{pddl}{PDDL}{Planning Domain Definition Language}
-\newacronym{hddl}{HDDL}{Hierarchical Domain Definition Language}
-\newacronym{iope}{IOPE}{Inputs, Outputs, Preconditions and Effects}
-\newacronym{faas}{FaaS}{Function-as-a-service}
-\newacronym{csp}{CSP}{Constraint Satisfaction Problem}
-\newacronym{qos}{QoS}{Quality of Service}
 \newacronym{gnn}{GNN}{Graph Neural Network}
 \newacronym{cnp}{CNP}{card-not-present}
+\newacronym{nlp}{NLP}{natural language processing}
 
-\title[Sub-title]{Client-side Alert on Banking Information Theft}
+\title[Phishing Banking Information]{Client-side Alert on Banking Information Theft}
 
 \author[Quenum and Gamundani]{%
-  Jos\'{e} Quenum\\
+  Jos\'{e} Quenum \and Attlee Gamundani\\
 Namibia University of Science and Technology, Windhoek\\
-\email{jquenum@nust.na}\And
-Attlee Gamundani\\
-Namibia University of Science and Technology, Windhoek\\
-\email{agamundani@nust.na}}
+\email{jquenum@nust.na\quad agamundani@nust.na}}
 
 \begin{document}
 

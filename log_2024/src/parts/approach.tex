@@ -105,7 +105,7 @@ To generate the initial graph, we iterate over the children of the HTML form. Fo
     \label{fig:form-to-graph-eg}
 \end{figure*}
 
-The \gls{gnn} consists of several layers, including three convolution layers, a pooling layer, a dropout layer and a dense layer. The task is a binary graph classification task. To generate the features of the dataset, we concatenate the attributes of each vertex and generate word embeddings using GloVe~\cite{pennington-socher-manning:2014}.  
+The \gls{gnn} consists of several layers, including three convolution layers, a pooling layer, a dropout layer and a dense layer. The task is a binary graph classification task. To generate the features of the dataset, we concatenate the attributes of each vertex and generate word embeddings using GloVe~\cite{pennington-socher-manning:2014}. For each node, we extract the attributes of the node, concatenate them and generate a vector of embeddings of $50$ elements. 
 
 % subsection Web Page Analysis (end)
 

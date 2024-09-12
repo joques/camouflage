@@ -10,8 +10,8 @@
 
 \documentclass{article}
 %\usepackage{log_2024}						% for camera-ready version
- \usepackage[review]{log_2024}				% for anonymous submission to proceedings track
-% \usepackage[review,eatrack]{log_2024}		% for anonymous submission to extended abstract track
+% \usepackage[review]{log_2024}				% for anonymous submission to proceedings track
+ \usepackage[review,eabstract]{log_2024}		% for anonymous submission to extended abstract track
 % \usepackage[preprint]{log_2024}			% for preprint version
 % \usepackage[eatrack]{log_2024}				% for accepted extended abstracts
 
@@ -121,5 +121,9 @@ Namibia University of Science and Technology, Windhoek\\
 \maketitle
 
 \begin{abstract}
-  This paper proposes an alert mechanism for potential banking information theft on the user side. While much effort has been invested in developing safer E-Commerce and online transactional applications to protect vendors, more needs to be accomplished to protect the clients of such systems against phishing. Generally, they are presented with recommendations and good practices to guard against fraudsters attempting to steal critical banking information from them. We argue that fraudsters use ever-changing social engineering tactics which often render these practices obsolete. This paper proposes a proactive approach to trigger an alert on potential phishing of banking information.  A typical scenario of phishing tactics uses an email to lure the user into clicking on a link with a URL corresponding to a Web interface where the critical information is captured. Our approach analyses the link and look for similar, mainly phonetically-sounding,  domain names. We further compare the web pages and the forms that capture the information. We transform these forms into graphs and compare them using a convolutional graph neural network (GNN). The intuition behind our approach suggests that the co-existence of similar phonetically sounding domains with almost identical web forms raises the probability of some of these domains being \emph{illegitimate}. Thus, we trigger an alert cautioning the user about a potential information theft. Our approach focuses on banking information theft. We present the approach and report on the results of our experiments.
+
+  This paper proposes an alert mechanism to warn users before they fall victim of a phishing attack. It combines \gls{nlp} text analysis, substring and super-string search using a suffix tree and a \gls{gnn}. Given an initial domain name, we perform exact and inexact searches of substrings and super-strings that are phonetically and visually similar to the original name. Subsequently, we execute a graph classification to check whether the new domains link to a form that collects similar information. Our intuition is that the co-existence of several phonetically and/or visually similar domain names linked to almost identical Web forms raises the probability that some of these domains are illegitimate. We use it to trigger an alert for the user to exercise more caution when providing information.
+
 \end{abstract}
+
+\glsresetall

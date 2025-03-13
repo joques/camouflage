@@ -1,17 +1,24 @@
 # Mobile Interface Fraud Scenarios for Banking Information Theft Detection
 
-## Phishing via Fake Banking/Ecommerce Websites
+## Scenario 1:Phishing via Fake Banking/Ecommerce Websites
 
 Attackers create fake banking/ecommerce websites that look identical to real ones but with slightly different URLs (e.g., chasse.com instead of chase.com). These sites are designed to trick users into entering login credentials and banking information when accessed through mobile browsers, taking advantage of the limited screen space that may hide the full URL from view.
+
+
+## Scenario 2:Fake Account Opening Sites
+
+Attackers create websites that mimic the account opening process of legitimate bank or ecommerce, tricking users into providing personal and banking information under the guise of opening a new account. Users may be directed to these sites through search engine optimization (SEO) techniques or social media ads.
+
+
 
 ## Attack Vector
 
 ### User Receives a Phishing Link
-- Users receive a link via email or social media, which looks legitimate.
-- The link directs users to the fake site
+- Users receive a link via email or social media which looks legitimate.
+- User Misspells URL: The user misspells the URL of their banking website and lands on a typosquatted domain.
 
 ### User Clicks the Link & Visits the Phishing Site
-- The website looks nearly identical to the real banking or ecommerce site
+- Upon clicking, the user is directed to a site that closely resembles a legitimate bank's or ecommerce's account opening page, using similar logos, color schemes and language.
 - The user sees a familiar login page and enters their banking information.
 
 ### Phishing Attack Happens

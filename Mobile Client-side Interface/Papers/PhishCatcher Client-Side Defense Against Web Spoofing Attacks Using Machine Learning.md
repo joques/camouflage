@@ -32,8 +32,7 @@ The paper addresses the increasing threat of phishing attacks, where attackers c
 - Compared to other anti-phishing tools, PhishCatcher performed significantly better in terms of detection accuracy and speed.
 
 
-
-## **4. Conclusion **
+## **4. Conclusion**
 - The client-side approach eliminates reliance on server-side solutions, enhancing privacy and independence from network latency.
 - PhishCatcher provides real-time phishing detection, making it a useful tool for individual users and organizations.
 - The study highlights the importance of machine learning in cybersecurity, especially for phishing attack detection.

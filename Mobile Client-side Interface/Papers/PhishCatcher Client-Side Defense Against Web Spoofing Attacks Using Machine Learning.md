@@ -17,10 +17,10 @@ The paper addresses the increasing threat of phishing attacks, where attackers c
 ### **2. Methodology**
 - **Approach:** Development of a Google Chrome extension (PhishCatcher) that uses a Random Forest classifier to determine whether a login web page is legitimate or fake.
 - **Input Features:** The algorithm takes into account four types of web features:
-  1. Visual Similarity (page layout and structure)
-  2. URL-based Features (length, HTTPS presence, subdomains, etc.)
-  3. Web Page Content (HTML elements, JavaScript behavior)
-  4. Blacklist Comparison (against known phishing sites)
+   - Visual Similarity (page layout and structure)
+   - URL-based Features (length, HTTPS presence, subdomains, etc.)
+   - Web Page Content (HTML elements, JavaScript behavior)
+   - Blacklist Comparison (against known phishing sites)
 - **Testing Approach:** The model was trained and tested using 400 phishing URLs and 400 legitimate URLs, and further experiments were conducted to assess latency.
 
 

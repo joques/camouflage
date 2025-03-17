@@ -14,7 +14,7 @@ The paper addresses the increasing threat of phishing attacks, where attackers c
 
 
 
-### **2. Methodology**
+## **2. Methodology**
 - **Approach:** Development of a Google Chrome extension (PhishCatcher) that uses a Random Forest classifier to determine whether a login web page is legitimate or fake.
 - **Input Features:** The algorithm takes into account four types of web features:
    - Visual Similarity (page layout and structure)
@@ -25,7 +25,7 @@ The paper addresses the increasing threat of phishing attacks, where attackers c
 
 
 
-### **3. Key Findings **
+## **3. Key Findings**
 - The Random Forest classifier achieved 98.5% accuracy and 98.5% precision in identifying phishing websites.
 - The average detection latency was only 62.5 milliseconds, making it highly efficient.
 - The PhishCatcher Chrome extension successfully identified phishing pages in real-world tests, including a phishing attack targeting Inria (National Institute for Research in Digital Science and Technology, France).
@@ -33,7 +33,7 @@ The paper addresses the increasing threat of phishing attacks, where attackers c
 
 
 
-### **4. Conclusion **
+## **4. Conclusion **
 - The client-side approach eliminates reliance on server-side solutions, enhancing privacy and independence from network latency.
 - PhishCatcher provides real-time phishing detection, making it a useful tool for individual users and organizations.
 - The study highlights the importance of machine learning in cybersecurity, especially for phishing attack detection.

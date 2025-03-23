@@ -1,4 +1,4 @@
-# Client-side Detection of  Banking Information Theft Detection
+# Client-Side Detection of Banking Information Theft Using Machine Learning 
 
 ## Overview
 

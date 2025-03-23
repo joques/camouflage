@@ -15,7 +15,7 @@ Attackers create websites that mimic the account opening process of legitimate b
 
 ### User Receives a Phishing Link
 - Users receive a link via email or social media which looks legitimate.
-- User Misspells URL: The user misspells the URL of their banking website and lands on a typosquatted domain.
+- The user misspells the URL of their banking website and lands on a typosquatted domain.
 
 ### User Clicks the Link & Visits the Phishing Site
 - Upon clicking, the user is directed to a site that closely resembles a legitimate bank's or ecommerce's account opening page, using similar logos, color schemes and language.

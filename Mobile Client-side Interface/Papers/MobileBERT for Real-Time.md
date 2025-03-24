@@ -1,4 +1,4 @@
-- **Title:** PhishLang: A Lightweight, Client-Side Phishing Detection Framework using MobileBERT for Real-Time, Explainable Threat Mitigation 
+# PhishLang: A Lightweight, Client-Side Phishing Detection Framework using MobileBERT for Real-Time, Explainable Threat Mitigation 
 - **Authors:** Sayak Saha Roy and Shirin Nilizadeh 
 - **Digital Object Identifier:** https://doi.org/10.48550/arXiv.2408.05667
 - **Year:** 2024

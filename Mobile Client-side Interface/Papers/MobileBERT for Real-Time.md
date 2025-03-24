@@ -8,7 +8,7 @@
 In this paper, we introduce PhishLang, an open-source, lightweight language model specifically designed for phishing website detection through contextual analysis of the website. Unlike traditional heuristic or machine learning models that rely on static features and struggle to adapt to new threats, and deep learning models that are computationally intensive, our model leverages MobileBERT, a fast and memory-efficient variant of the BERT architecture, to learn granular features characteristic of phishing attacks. PhishLang operates with minimal data preprocessing and offers performance comparable to leading deep learning anti-phishing tools, while being significantly faster and less resource-intensive. Over a 3.5-month testing period, PhishLang successfully identified 25,796 phishing URLs, many of which were undetected by popular antiphishing blocklists, thus demonstrating its potential to enhance current detection measures. Capitalizing on PhishLang's resource efficiency, we release the first open-source fully client-side Chromium browser extension that provides inference locally without requiring to consult an online blocklist and can be run on low-end systems with no impact on inference times. Our implementation not only outperforms prevalent (server-side) phishing tools, but is significantly more effective than the limited commercial client-side measures available. Furthermore, we study how PhishLang can be integrated with GPT-3.5 Turbo to create explainable blocklisting -- which, upon detection of a website, provides users with detailed contextual information about the features that led to a website being marked as phishing.
 
 
-## **1. Problem & Objective**
+## Problem statement  & Objective
 Phishing remains a major cybersecurity threat, with attackers constantly evolving their methods. 
 **PhishLang** is designed to tackle phishing detection challenges by:
 - Replacing static heuristic-based detection with contextual language analysis of phishing websites.
@@ -17,8 +17,7 @@ Phishing remains a major cybersecurity threat, with attackers constantly evolvin
 - Deploying a privacy-friendly, fully client-side browser extension that runs without needing external databases or blocklists.
 
 
-
-## **2. Methodology**
+## Methodology
 The authors introduce PhishLang, which detects phishing attacks using:
 1. **MobileBERT for Language Analysis**  
    - Extracts key linguistic and structural patterns in website source code to detect phishing.  
@@ -49,8 +48,7 @@ The authors introduce PhishLang, which detects phishing attacks using:
    - Outperformed existing blocklists, catching threats that Google Safe Browsing and Microsoft SmartScreen missed.
 
 
-
-## **3. Key Findings**
+## Key Findings
 1. **Superior Detection Performance**  
    - F1-score: 0.96, better than DistilBERT (0.94), TinyBERT (0.85), and traditional ML models.
    - Outperformed commercial anti-phishing solutions like Google Safe Browsing.
@@ -61,7 +59,6 @@ The authors introduce PhishLang, which detects phishing attacks using:
      - Clickjacking (invisible login elements)
      - DOM manipulations (dynamically generated phishing content)
    
-
 3. Explainability with GPT-3.5 Turbo  
    - Instead of just blocking sites, PhishLang explains why they are suspicious.
    - Uses LIME-based feature attribution to extract the top 3 phishing indicators.

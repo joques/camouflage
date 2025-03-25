@@ -30,5 +30,13 @@ As technology is constantly evolving, modern conveniences such as mobile devices
 - Outline future research challenges.  
 
 ## Literature Review
+- Mobile Phishing Context: The rise in mobile device usage has coincided with an increase in phishing attacks. Android, the most widely used mobile OS, is particularly vulnerable due to malicious apps in the Google Play Store (e.g., a 338% increase in malicious apps reported by Robinson, 2014).
+
+- Existing studies have explored various methods for phishing detection, including behavior analysis, feature selection, and machine learning models.
+
+- A large-scale study on 19,066 phishing attacks from PhishTank found that 90% were duplicates or slight modifications of previously recorded phishing attempts.
+
+- Zero-day phishing attacks remain a major challenge, requiring more advanced detection techniques.
+
 
 ## Mobile Phishing Mitigation Techniques  

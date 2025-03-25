@@ -40,3 +40,11 @@ As technology is constantly evolving, modern conveniences such as mobile devices
 
 
 ## Mobile Phishing Mitigation Techniques  
+The paper categorizes mobile phishing detection and mitigation techniques into 10 approaches, each with unique strengths and weaknesses.
+
+### 1 IP Packet Analysis
+- MP-Shield (Android-based detection framework) 
+  - Uses network traffic analysis to detect phishing attacks.  
+  - Relies on blacklists, watchdog monitoring, and HTML analysis.  
+  - **Weakness:** Limited to IP-based filtering, does not handle content-based phishing.  
+  - **Effectiveness:** 71.99% detection accuracy using J48 decision tree classifier.  

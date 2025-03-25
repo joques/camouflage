@@ -8,3 +8,27 @@
 
 ## Abstract  
 As technology is constantly evolving, modern conveniences such as mobile devices have changed the way that society performs its daily routines and functions as a whole. Because the evolution of technology has made it almost a requirement for citizens to possess mobile devices, this increase in ownership has also brought security issues such as phishing.  A phisher intends to obtain information that will aid the hacker by appearing to the unsuspecting owner as a trustworthy entity. The goal of phishing is to fool mobile device owners into giving the attacker sensitive information, such as usernames, passwords, as well as credit and debit card information. In this paper, we provide a taxonomy of mobile anti-phishing techniques and mitigation strategies available for mobile devices. Our goal is to provide an informative model to identify current solutions in reducing phishing attacks on mobile devices and outline limitations and future challenges.
+
+## Context & Problem Statement  
+
+- The widespread adoption of mobile devices has increased the risk of phishing attacks, as mobile users frequently engage in online banking, e-commerce, and social media.  
+- Phishing is a method where attackers trick users into revealing sensitive information by impersonating legitimate websites or applications.  
+
+### Common Forms of Mobile Phishing:  
+- **Smishing (SMS phishing):** Malicious links sent via text messages.  
+- **Malicious apps:** Fake applications designed to steal user credentials.  
+- **Browser-based phishing:** Fake login pages that mimic real websites.  
+
+### Why Mobile Phishing is Harder to Detect:  
+- Small screen sizes make it difficult to verify URLs.  
+- Users are less aware of phishing risks compared to desktop users.  
+- More than 40% of mobile applications require users to enter credentials, creating phishing opportunities.  
+
+### Goal of the Paper:  
+- Provide a taxonomy of mobile anti-phishing techniques.  
+- Identify existing solutions and their limitations.  
+- Outline future research challenges.  
+
+## Literature Review
+
+## Mobile Phishing Mitigation Techniques  

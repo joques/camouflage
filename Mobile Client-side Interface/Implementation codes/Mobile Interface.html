@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Phishing Detector</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function extractWebsiteData() {
+                
+                // getting current URL and  extract page content
+                let currentURL = window.location.href;
+                let pageTitle = document.title;
+                let pageForms = document.querySelectorAll("form").length;
+                let pageScripts = document.querySelectorAll("script").length;
+                let pageLinks = document.querySelectorAll("a").length;
+                let pageInputs = document.querySelectorAll("input[type='password'], input[type='email'], input[type='text']").length;
+               
+               // Collect extracted data
+                let extractedData = {
+                    url: currentURL,
+                    title: pageTitle,
+                    numForms: pageForms,
+                    numScripts: pageScripts,
+                    numLinks: pageLinks,
+                    numInputs: pageInputs
+                };
+               
+               // logging on console for debugging purposes
+                console.log("Extracted Website Data:", extractedData);
+               
+                // Sending extracted data to the ML model for analysis
+                sendDataForAnalysis(extractedData);
+            }
+
+            function sendDataForAnalysis(data) {
+                fetch('link to the model', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log("Analysis Result:", result);  
+                    handleThreatAlert(result);
+                })
+                .catch(error => console.error("Error sending data for analysis:", error));
+            }
+           
+            function handleThreatAlert(result) {
+                if (result.threat_level === "high") {
+                    alert("Danger: This site is flagged as a phishing attempt webisite!");
+                    document.body.innerHTML = "<h2>Warning </h2><p>This site has been identified as a phishing threat.</p>";
+                } else if (result.threat_level === "medium") {
+                    alert("Warning: This site may be suspicious. Proceed with caution.");
+                }
+            }
+           
+            extractWebsiteData();
+        });
+    </script>
+</head>
+<body>
+    <h2>Mobile Phishing Detection Interface</h2>
+    <p></p>
+</body>
+</html>

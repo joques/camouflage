@@ -100,3 +100,9 @@ The paper categorizes mobile phishing detection and mitigation techniques into 1
 3. **SMS Mining for Smishing Detection:**
    - Uses keyword-based rule sets and machine learning to detect fraudulent SMS messages.
    - Example: SmiDCA model, achieved over 90% accuracy.
+   
+   
+   
+### Conclusion 
+
+The paper concludes that while numerous anti-phishing techniques exist, each has unique strengths and weaknesses. The taxonomy provides a framework for understanding these methods, but the evolving nature of phishing (e.g., dynamic webpage features) demands new solutions. The authors advocate for hybrid approaches and further research into non-Android platforms and real-time detection.

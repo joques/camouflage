@@ -48,3 +48,61 @@ The paper categorizes mobile phishing detection and mitigation techniques into 1
   - Relies on blacklists, watchdog monitoring, and HTML analysis.  
   - **Weakness:** Limited to IP-based filtering, does not handle content-based phishing.  
   - **Effectiveness:** 71.99% detection accuracy using J48 decision tree classifier.  
+
+### 2 User Authentication Techniques
+1. **Password Management**
+   - one-time passwords (OTP) or encrypted password storage.
+   - **Weakness**: Vulnerable to Trojan horse attacks.
+2. **Interface Verification (VeriUI)**
+   - Verifies if a login interface is legitimate before users enter credentials.
+   - Uses SSL certificates and secure input methods.
+   - **Weakness**: Requires constant certificate updates.
+3. **QR Code-Based Authentication**
+   - QR codes for secure logins, avoiding direct password entry.
+   - **Weakness**: A fraudulent man-in-the-middle attack could intercept user credentials.
+
+### 3 SMS Interception
+- Phishing attacks involving SMS-based phishing (Smishing).  
+- A proposed solution modifies the Android framework layer to block SMS interception.  
+- **Weakness:** Only works at the OS-level, does not detect phishing websites embedded in SMS links.  
+
+### 4 Cloud Security Services 
+- Uses cloud-based detection for spam filtering, phishing detection, and blacklists.  
+- Example: CloudAV (Mobile Agent-Based Security)  
+  - Scans applications and websites remotely in the cloud.  
+  - **Weakness:** Relies on network connectivity, may compromise user privacy.  
+  
+### 5 Visual Similarity Detection
+- Droid Eagle Compares visual layout of mobile apps to detect repackaged phishing apps.  
+- Uses layout trees and similarity matching algorithms.  
+- **Weakness:** Does not work well against dynamically loaded phishing content.  
+
+### 6 Static Analysis for URL and Webpage Detection
+- **MobiFish (Static URL Analysis)**:
+  - Extracts HTML features and domain name patterns to classify phishing sites.
+  - Performance: Achieved 100% success rate in a controlled test.
+  - **Weakness**: Does not account for real-time phishing URL changes.
+- **kAYO (Static & Dynamic Analysis)**:
+  - Uses JavaScript analysis and URL heuristics to detect malicious pages.
+  - **Performance**: Achieved 90% accuracy in detecting mobile phishing.
+  
+  
+### 7 Machine Learning-Based Detection
+
+1. **URL Classification:**
+   - Uses feature-based classifiers (Random Forest, SVM, Decision Trees).
+   - Best performing classifier: Random Forest(highest accuracy).
+
+2. **API Log Data Mining:**
+   - Analyzes API call behavior to detect malicious phishing applications.
+   - **Weakness:** Ineffective against encrypted malware payloads.
+
+3. **SMS Mining for Smishing Detection:**
+   - Uses keyword-based rule sets and machine learning to detect fraudulent SMS messages.
+   - Example: SmiDCA model, achieved over 90% accuracy.
+   
+   
+   
+### Conclusion 
+
+The paper concludes that while numerous anti-phishing techniques exist, each has unique strengths and weaknesses. The taxonomy provides a framework for understanding these methods, but the evolving nature of phishing (e.g., dynamic webpage features) demands new solutions. The authors advocate for hybrid approaches and further research into non-Android platforms and real-time detection.

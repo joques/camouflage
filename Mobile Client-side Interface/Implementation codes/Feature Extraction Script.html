@@ -1,0 +1,142 @@
+
+// function to collect website features for phishing detection
+
+async function collectWebsiteFeatures() {
+  try {
+    const startTime = performance.now();
+    console.log("Starting feature Extractingion for phishing detection...");
+    
+    // Creating the base data structure
+    const featureData = {
+      metadata: {
+        timestamp: new Date().toISOString()
+      },
+      urlFeatures: await ExtractingUrlFeatures(),
+      domainFeatures: await ExtractingDomainFeatures(),
+      links: ExtractingLinkFeatures(),
+      semanticFeatures: ExtractingSemanticFeatures()
+    };
+    
+    // Calculating processing time
+    const processingTime = performance.now() - startTime;
+    console.log(`Feature Extractingion completed in ${processingTime.toFixed(2)}ms`);
+    
+    // Sending data to the background script for analysis
+    chrome.runtime.sendMessage({
+      action: "analyseFeatures",
+      featureData: featureData
+    });
+    
+    return featureData;
+  } catch (error) {
+    console.error("Error collecting website features:", error);
+    chrome.runtime.sendMessage({
+      action: "ExtractingionError",
+      error: error.message
+    });
+  }
+}
+
+
+ // Extractinging all URL-related features
+
+async function ExtractingUrlFeatures() {
+  const currentUrl = window.location.href;
+  const urlObj = new URL(currentUrl);
+  
+  // Extracting URL components
+  const protocol = urlObj.protocol.replace(':', '');
+  const hostname = urlObj.hostname;
+  const pathname = urlObj.pathname;
+  
+  // getting URL length
+  const urlLength = currentUrl.length;
+  
+  // Getting path depth (number of directories)
+  const pathDepth = pathname.split('/').filter(Boolean).length;
+  
+  // Getting subdomain count
+  const hostnameParts = hostname.split('.');
+  const subdomainCount = hostnameParts.length > 2 ? hostnameParts.length - 2 : 0;
+  
+  // Getting domain name length (excluding subdomains and TLD)
+  const domainNameLength = hostnameParts.length > 1 ? 
+    hostnameParts[hostnameParts.length - 2].length : hostname.length;
+  
+  // Getting top level domain
+  const topLevelDomain = hostnameParts.length > 1 ? 
+    hostnameParts[hostnameParts.length - 1] : "";
+  
+  // Checking if URL contains an IP address
+  const ipRegex = /^(https?:\/\/)?(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/;
+  const containsIP = ipRegex.test(currentUrl);
+  
+  // Checking for hexadecimal characters in URL
+  const hexRegex = /(%[0-9A-Fa-f]{2})|([0-9A-Fa-f]{8,})/;
+  const containsHexChars = hexRegex.test(currentUrl);
+  
+  // Checking for @ symbol in URL
+  const containsAtSymbol = currentUrl.includes('@');
+  
+  // Checking for dash symbol in domain
+  const containsDashSymbol = hostname.includes('-');
+  
+  // Checking for port number in URL
+  const portRegex = /:\d+/;
+  const containsPortNumber = portRegex.test(hostname);
+  
+  // Checking if URL uses a URL shortener
+  const shortenerDomains = [
+    'bit.ly', 'tinyurl.com', 'goo.gl', 't.co', 'ow.ly', 
+    'is.gd', 'buff.ly', 'adf.ly', 'tiny.cc', 'shrinkme.io'
+  ];
+  const usesUrlShortener = shortenerDomains.some(domain => hostname.includes(domain));
+  
+  // Extracting query parameters
+  const queryParams = {};
+  urlObj.searchParams.forEach((value, key) => {
+    queryParams[key] = value;
+  });
+  
+  return {
+    fullUrl: currentUrl,
+    protocol,
+    hostname,
+    pathname,
+    queryParams,
+    urlLength,
+    pathDepth,
+    subdomainCount,
+    domainNameLength,
+    topLevelDomain,
+    containsIP,
+    containsHexChars,
+    containsAtSymbol,
+    containsDashSymbol,
+    containsPortNumber,
+    usesUrlShortener
+  };
+}
+
+
+ // Extracting domain-related features including WHOIS and certificate info
+
+async function ExtractingDomainFeatures() {
+  const hostname = window.location.hostname;
+  
+  // a call to  WHOIS to implemented 
+  const domainAge = await fetchDomainAge(hostname);
+  
+   // A call to  WHOIS to implemented 
+  const registrationDetails = await fetchRegistrationDetails(hostname);
+  
+  // Certificate information
+  const certificateInfo = ExtractingCertificateInfo();
+  
+  return {
+    domainAge,
+    registrationDetails,
+    certificateInfo
+  };
+}
+

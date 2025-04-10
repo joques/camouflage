@@ -1,0 +1,74 @@
+// JSON Data Structure for Website Scraping (Feature Vector Input)
+{
+  "metadata": {
+    "timestamp": "2025-04-07T15:23:45.678Z"
+  },
+  
+  "urlFeatures": {
+    "fullUrl": ,
+    "protocol": ,
+    "hostname": ,
+    "pathname": ,
+    "queryParams": ,
+    "urlLength": ,
+    "pathDepth": ,
+    "subdomainCount": ,
+    "domainNameLength":,
+    "topLevelDomain":,
+    "containsIP": ,
+    "containsHexChars": ,
+    "containsAtSymbol":,
+    "containsDashSymbol":,
+    "containsPortNumber":,
+    "usesUrlShortener": 
+    },
+  
+  "domainFeatures": {
+    "domainAge": {
+      "creationDate": ,
+      "ageInDays": 
+    },
+	
+    "registrationDetails": {
+      "registrationLength": {
+        "expirationDate": ,
+        "lengthInYears": 
+	},
+	
+    "certificateInfo": {
+      "issuer": ,
+      "validFrom": ,
+      "validTo": ,
+      "isSelfSigned":,
+    },
+  
+  
+  "links": {
+    "total_links": ,
+    "external_links":,
+    "internal_links":,
+    "anchor_texts": [ ]
+  },
+  
+	
+  "semanticFeatures": {
+    "urgencySignals": {
+      "detected": ,
+      "phrases": [ ]
+    },
+	
+    "securitySignals": {
+      "detected": ,
+      "phrases": [ ]
+    },
+    "rewardSignals": {
+      "detected": ,
+      "phrases": [ ]
+    },
+    "threatSignals": {
+      "detected": ,
+      "phrases": [ ]
+    },
+
+  
+}

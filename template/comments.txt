@@ -1,0 +1,21 @@
+1 - The paper does not evaluate the end-to-end phishing-alerting claim. Section 7
+explicitly provides an example and a theoretical analysis, but no labeled
+phishing/benign test set, detection precision or recall, false-positive rate, threshold
+trade-oﬀ, latency, or comparison with an existing detector. Table 2 evaluates only
+the GNN subcomponent. At the moment, there is no empirical evidence that the full
+pipeline detects phishing or produces reliable alerts.
+
+2 - There is no end-to-end evaluation. Section 7 offers a single
+example and a complexity analysis. There is no measurement of the full system on
+real phishing data, no detection rate, and no false-positive rate. The central claim,
+that co-existing similar domains plus similar interfaces indicate phishing, is not
+compared with existing domain-similarity or phishing-detection systems.
+
+3 - No end-to-end evaluation of the proposed phishing-alert system
+The most serious issue is that the paper does not evaluate the complete system on
+a phishing-email or phishing-website benchmark. Section 7 contains only an
+illustrative example and a theoretical complexity discussion. There is no
+measurement of phishing detection rate, false-positive rate, precision, recall, F1,
+ROC-AUC, alert rate, or user-level benefit for the final system. As a result, the paper
+does not demonstrate that combining domain similarity, interface classification, and
+probabilistic inference actually detects phishing reliably.
